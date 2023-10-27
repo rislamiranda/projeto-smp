@@ -3,6 +3,7 @@
 ### ************************************************************************************###
 
 import streamlit as st
+import streamlit as stsobrenos
 import pandas as pd
 #import seaborn as sns
 #import matplotlib.pyplot as plt
@@ -13,12 +14,11 @@ from PIL import Image
 from streamlit_option_menu import option_menu
 
 
-
 ### ************************************************************************************###
 ### Adicionando MENUS na página ###
 ### ************************************************************************************###
 
-# Criando o MENU
+# Criando o MENU LATERAL
 with st.sidebar:
     selected = option_menu(None, ["O Projeto", 'Sobre Nós'], icons=['house', 'people'], menu_icon="cast", default_index=1, styles={
         "container": {"padding": "0!important", "background-color": "#fafafa"},
@@ -27,23 +27,50 @@ with st.sidebar:
          "nav-link-selected": {"background-color": "green"},
     }
 )
-    
+
+### ************************************************************************************###
+### Página SOBRE ###
+### ************************************************************************************###
+# Criando a página sobre
+def sobre():
+    stsobrenos = st.empty()
+    stsobrenos.title("Sobre")
+    stsobrenos.write("Nesse projeto apresentamos uma série temporal de acessos no mercado de telefonia móvel, identificando  padrões e tendências nesse mercado e analisando a qualidade do serviço a partir do uso de tecnologias (4G, 3G e 2G)")
+
+
+# O que acontece se clicarmos nos botões laterais
 if selected == "O Projeto":
        st.write(' ')
 elif selected == "Sobre Nós":
+        #webbrowser.open("/sobre_nos.py")
         st.write(' ')
+        #sobre()
+else:
+        st.write(' ')
+      # st.redirect("/sobre.py")
+       
+    
 
-
-selected3 = option_menu(None, ["Acesso a Informação",  "Mapa", "Legislação", 'Sobre'], 
+# Criando o MENU PRINCIPAL - BARRA
+selected2 = option_menu(None, ["Documentação",  "Mapas", "Dashboards", 'Sobre'], 
         icons=['house', "map", "list-task", 'book'], 
         menu_icon="cast", default_index=0, orientation="horizontal",
         styles={
         "container": {"padding": "0!important", "background-color": "#fafafa"},
         "icon": {"color": "orange", "font-size": "20px"}, 
         "nav-link": {"font-size": "15px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
-        "nav-link-selected": {"background-color": "green"},
+        "nav-link-selected": {"background-color": "gray"},
         }
 )
+
+# O que acontece se clicarmos nos botões laterais
+if selected2 == "Documentação":
+       st.write(' ')
+elif selected2 == "Mapas":
+        st.write(' ')
+elif selected2 == "Dashboards":
+        webbrowser.open("https://app.powerbi.com/view?r=eyJrIjoiMGU2Njc3NWQtZDkzNC00YWZhLWFmYmMtNDcyOTlmN2RlNjZlIiwidCI6IjlkYmE0ODBjLTRmYTctNDJmNC1iYmEzLTBmYjEzNzVmYmU1ZiJ9")
+
 
 
 ### ************************************************************************************###
@@ -124,6 +151,8 @@ if btn_documentacao:
     webbrowser.open("https://www.gov.br/mec/pt-br/assuntos/paineis-de-monitoramento-e-indicadores")
 elif btn_painel:
     webbrowser.open("https://www.gov.br/mec/pt-br/assuntos/paineis-de-monitoramento-e-indicadores")
+
+
 
     
 ### ************************************************************************************###
