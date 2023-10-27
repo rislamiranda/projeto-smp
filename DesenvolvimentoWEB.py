@@ -18,7 +18,7 @@ st.markdown("<h2 style='text-align: center; color: blue;'>MERCADO REGULADO TELEF
 #st.title('** MERCADO REGULADO DE TELEFONIA MÓVEL **')
 
 # Importar a imagem
-image = Image.open("fig/image.png")
+image = Image.open("image.png")
 left_co, cent_co,last_co = st.columns(3)
 with cent_co:
     st.image(image, width=400)
