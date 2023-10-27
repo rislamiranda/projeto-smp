@@ -3,7 +3,6 @@
 ### ************************************************************************************###
 
 import streamlit as st
-import streamlit as stsobrenos
 import pandas as pd
 #import seaborn as sns
 #import matplotlib.pyplot as plt
@@ -17,43 +16,11 @@ from streamlit_option_menu import option_menu
 ### ************************************************************************************###
 ### Adicionando MENUS na página ###
 ### ************************************************************************************###
-
-# Criando o MENU LATERAL
-with st.sidebar:
-    selected = option_menu(None, ["O Projeto", 'Sobre Nós'], icons=['house', 'people'], menu_icon="cast", default_index=1, styles={
-        "container": {"padding": "0!important", "background-color": "#fafafa"},
-        "icon": {"color": "orange", "font-size": "20px"}, 
-        "nav-link": {"font-size": "15px", "text-align": "left", "margin":"auto", "--hover-color": "#eee"},
-         "nav-link-selected": {"background-color": "green"},
-    }
-)
-
-### ************************************************************************************###
-### Página SOBRE ###
-### ************************************************************************************###
-# Criando a página sobre
-def sobre():
-    stsobrenos = st.empty()
-    stsobrenos.title("Sobre")
-    stsobrenos.write("Nesse projeto apresentamos uma série temporal de acessos no mercado de telefonia móvel, identificando  padrões e tendências nesse mercado e analisando a qualidade do serviço a partir do uso de tecnologias (4G, 3G e 2G)")
-
-
-# O que acontece se clicarmos nos botões laterais
-if selected == "O Projeto":
-       st.write(' ')
-elif selected == "Sobre Nós":
-        #webbrowser.open("/sobre_nos.py")
-        st.write(' ')
-        #sobre()
-else:
-        st.write(' ')
-      # st.redirect("/sobre.py")
-       
-    
+ 
 
 # Criando o MENU PRINCIPAL - BARRA
-selected2 = option_menu(None, ["Documentação",  "Mapas", "Dashboards", 'Sobre'], 
-        icons=['house', "map", "list-task", 'book'], 
+selected = option_menu(None, ["Documentação",  "Mapas", "Dashboards", 'Sobre'], 
+        icons=['house', "map", "bar-chart", 'book'], 
         menu_icon="cast", default_index=0, orientation="horizontal",
         styles={
         "container": {"padding": "0!important", "background-color": "#fafafa"},
@@ -64,12 +31,12 @@ selected2 = option_menu(None, ["Documentação",  "Mapas", "Dashboards", 'Sobre'
 )
 
 # O que acontece se clicarmos nos botões laterais
-if selected2 == "Documentação":
-       st.write(' ')
-elif selected2 == "Mapas":
+if selected == "Documentação":
+       st.write(' ')        
+elif selected == "Mapas":
         st.write(' ')
-elif selected2 == "Dashboards":
-        webbrowser.open("https://app.powerbi.com/view?r=eyJrIjoiMGU2Njc3NWQtZDkzNC00YWZhLWFmYmMtNDcyOTlmN2RlNjZlIiwidCI6IjlkYmE0ODBjLTRmYTctNDJmNC1iYmEzLTBmYjEzNzVmYmU1ZiJ9")
+elif selected == "Dashboards":
+        st.write(' ')
 
 
 
@@ -91,7 +58,7 @@ st.markdown("<h2 style='text-align: center; color: blue;'>MERCADO REGULADO TELEF
 ### ************************************************************************************###
 
 # Importar a imagem
-image = Image.open("image.png")
+image = Image.open("fig/image.png")
 left_co, cent_co,last_co = st.columns(3)
 with cent_co:
     st.image(image, width=400)
@@ -121,7 +88,7 @@ st.markdown("Construir uma série temporal de acessos no mercado de telefonia m�
 st.markdown("Identificar padrões e tendências nesse mercado")
 st.markdown("Analisar a qualidade do serviço a partir da tecnologia (4G, 3G e 2G))")
 st.markdown("Criar um relatório final com as análises realizadas e publicação dos scripts de análise")
-
+#Resultado de um novo posicionamento, o portal busca oferecer informação útil e de qualidade para os
 
 
 
@@ -180,3 +147,39 @@ elif btn_painel:
 # Clique no botão
 #if btn_painel:
  #   webbrowser.open("https://www.gov.br/mec/pt-br/assuntos/paineis-de-monitoramento-e-indicadores")
+
+
+### ************************************************************************************###
+### Adicionando MENUS na página ###
+### ************************************************************************************###
+
+# Criando o MENU LATERAL
+#with st.sidebar:
+ #   selected = option_menu(None, ["O Projeto", 'Sobre Nós'], icons=['house', 'people'], menu_icon="cast", default_index=1, styles={
+  #      "container": {"padding": "0!important", "background-color": "#fafafa"},
+   #     "icon": {"color": "orange", "font-size": "20px"}, 
+    #    "nav-link": {"font-size": "15px", "text-align": "left", "margin":"auto", "--hover-color": "#eee"},
+     #    "nav-link-selected": {"background-color": "green"},
+    #}
+#)
+
+### ************************************************************************************###
+### Página SOBRE ###
+### ************************************************************************************###
+# Criando a página sobre
+#def sobre():
+ #   stsobrenos = st.empty()
+ #   stsobrenos.title("Sobre")
+ #   stsobrenos.write("Nesse projeto apresentamos uma série temporal de acessos no mercado de telefonia móvel, identificando  padrões e tendências nesse mercado e analisando a qualidade do serviço a partir do uso de tecnologias (4G, 3G e 2G)")
+
+
+# O que acontece se clicarmos nos botões laterais
+#if selected == "O Projeto":
+#       st.write(' ')
+#elif selected == "Sobre Nós":
+        #webbrowser.open("/sobre_nos.py")
+#        st.write(' ')
+        #sobre()
+#else:
+    #    st.write(' ')
+      # st.redirect("/sobre.py")
