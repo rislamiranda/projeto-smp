@@ -21,13 +21,27 @@ st.markdown("<h5 style='text-align: justify; color: black;'>Esse projeto resulto
 st.markdown("-------------------")
 
 
-
-
 # arquivo = './Bootcamp Enap/projeto-smp/df_tec_geracao.csv'
 
-st.cache_data
+### ************************************************************************************###
+### Orientação do Bruno para melhorar a performance da exibição dos dados ###
+### ************************************************************************************###
 
-df = pd.read_csv('../data/df_tec_geracao.csv', sep=';')
+@st.cache_data
+def load_data():
+    # Carregue os dados do arquivo CSV
+    data = pd.read_csv('../data/df_tec_geracao.csv', sep=';')
+
+    # Retorne os dados
+    return data
+
+# Chame a função decorada
+df = load_data()
+
+### ************************************************************************************###
+### Inicio do Código da Bia para criar o MAPA
+### ************************************************************************************###
+#df = pd.read_csv('../data/df_tec_geracao.csv', sep=';')
 
 print(len(df))
 print(df.shape)
@@ -50,7 +64,6 @@ df['percentual'] = df['percentual'].str.replace(',', '.', regex=True).astype(flo
 
 # estamos aplicando a substituição do caracter ',' por '.' em cada coluna ('percentual' e 'media_ano') 
 # individualmente; e depois usamos o método astype(float) para converter os valores para o tipo de dados float
-
 
 
 # restringindo o numero de casas decimais da coluna percentual a 2 casas decimais
@@ -88,7 +101,7 @@ tec_5g_nsa = df.query('`Tecnologia Geração` == "5G Non Stand Alone"')
 
 # vendo os dataframes por tecnologia
 
-tec_5g_nsa
+#tec_5g_nsa
 
 df['Tecnologia Geração'].unique()
 
@@ -101,7 +114,7 @@ plt.plot(tec_3g["ano"], tec_3g["percentual"], label = "3G", linewidth = 2.5, col
 plt.plot(tec_m2m["ano"], tec_m2m["percentual"], label = "M2M", linewidth = 2.5, color = "gold")
 plt.plot(tec_4g["ano"], tec_4g["percentual"], label = "4G", linewidth = 2.5, color = "red")
 plt.plot(tec_5g["ano"], tec_5g["percentual"], label = "5G", linewidth = 2.5, color = "magenta")
-plt.plot(tec_5g_nsa["ano"], tec_5g_nsa["percentual"], label = "5G-NSA", linewidth = 2.5, color = "blue")
+#plt.plot(tec_5g_nsa["ano"], tec_5g_nsa["percentual"], label = "5G-NSA", linewidth = 2.5, color = "blue")
 plt.title("Evolução das Tecnologias de Geração \n Anos 2009 a 2023", fontweight='bold')
 plt.xlabel("Período")
 plt.ylabel("Acessos no ano (%)")
@@ -116,6 +129,12 @@ plt.legend()
 st.pyplot(grafico_1)
 
 plt.savefig('grafico_tecnologia_estatico.png')
+
+
+### ************************************************************************************###
+### Código EXTRA ###
+### ************************************************************************************###
+## Dar preferência a usar os comandos do streamlit ao inves do plotly
 
 
 #criando um gráfico de linhas responsivo
