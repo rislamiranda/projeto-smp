@@ -112,7 +112,8 @@ plt.annotate('4G é a tecnologia mais utilizada atualmente', (2023,80), xytext=(
 plt.ticklabel_format(style="plain", axis="y")
 plt.grid()
 plt.legend()
-plt.show()
+#plt.show()
+st.pyplot(grafico_1)
 
 plt.savefig('grafico_tecnologia_estatico.png')
 
