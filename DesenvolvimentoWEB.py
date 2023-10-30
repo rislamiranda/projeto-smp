@@ -11,6 +11,7 @@ import os
 import webbrowser
 from PIL import Image
 from streamlit_option_menu import option_menu
+import plotly
 
 
 # Defina a cor do background
