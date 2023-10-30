@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 import plotly.express as px
-import plotly.io as pio
+#import plotly.io as pio
 
 import os
 from geojson_rewind import rewind
@@ -183,7 +183,7 @@ resultados_df = pd.merge(resultados[['Código Nacional', 'ano', 'media_ano']],
 
 
 
-resultados_df.head()
+#resultados_df.head()
 
 #puxar a malha geográfica do brasil a nível de município
 
@@ -198,7 +198,7 @@ geojson = rewind(geojson, rfc7946=False)
 
 
 max_min = resultados_df.groupby('ano').agg({'media_ano':'max'}).min().values[0]
-max_min
+#max_min
 
 resultados_df['media_ano'] = resultados_df['media_ano'].map(lambda x:max_min if x > max_min else x)
 
