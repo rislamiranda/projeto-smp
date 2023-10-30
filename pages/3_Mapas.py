@@ -5,6 +5,7 @@ import streamlit as st
 from PIL import Image
 import pandas as pd
 import matplotlib.pyplot as plt
+import plotly as plo
 import plotly.express as px
 
 ### ************************************************************************************###
