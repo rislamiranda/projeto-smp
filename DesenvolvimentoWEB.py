@@ -12,8 +12,6 @@ import webbrowser
 from PIL import Image
 from streamlit_option_menu import option_menu
 
-
-
 # Defina a cor do background
 #st.set_page_config(page_title="MERCADO REGULADO TELEFONIA MÓVEL", page_icon=None, layout="centered", initial_sidebar_state="auto", menu_items=None)
 
