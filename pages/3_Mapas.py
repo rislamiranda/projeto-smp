@@ -5,7 +5,7 @@ import streamlit as st
 from PIL import Image
 import pandas as pd
 import matplotlib.pyplot as plt
-import plotly.express as px
+#import plotly.express as px
 
 ### ************************************************************************************###
 ### Adicionando o título da página ###
@@ -119,22 +119,22 @@ plt.savefig('grafico_tecnologia_estatico.png')
 
 
 #criando um gráfico de linhas responsivo
-grafico_2 = px.line(df, x = "ano", y = "percentual", color="Tecnologia Geração").update_layout(
-xaxis_title = "Período",
-yaxis_title = "Acessos no ano (%)",
-title = "Evolução das Tecnologias de Geração - Anos 2009 a 2023",
-title_font_color = "blue",
-title_font_size = 24,
-title_x = 0.05,
-title_y = 0.93,
-xaxis_color = "blue",
-yaxis_color = "blue",
-xaxis_title_font=dict(size=16),
-yaxis_title_font=dict(size=16))
+##grafico_2 = px.line(df, x = "ano", y = "percentual", color="Tecnologia Geração").update_layout(
+#xaxis_title = "Período",
+#yaxis_title = "Acessos no ano (%)",
+#title = "Evolução das Tecnologias de Geração - Anos 2009 a 2023",
+#title_font_color = "blue",
+#title_font_size = 24,
+#title_x = 0.05,
+#title_y = 0.93,
+#xaxis_color = "blue",
+#yaxis_color = "blue",
+#xaxis_title_font=dict(size=16),
+#yaxis_title_font=dict(size=16))
 
 #o title_x pode varia de 0 a 1, e é a centralização do título em relação ao eixo x (ajuste na horizontal)
 #o title_y é o ajuste na vertical (varia de 0 a 1)
 
-grafico_2
+#grafico_2
 
-grafico_2.write_html('grafico_tecnologia_dinamico.html')
+#grafico_2.write_html('grafico_tecnologia_dinamico.html')
