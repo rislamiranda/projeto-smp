@@ -1,5 +1,11 @@
+### ************************************************************************************###
+### Bibliotecas necessárias ###
+### ************************************************************************************###
 import streamlit as st
 from PIL import Image
+import pandas as pd
+import matplotlib.pyplot as plt
+import plotly.express as px
 
 ### ************************************************************************************###
 ### Adicionando o título da página ###
@@ -15,9 +21,7 @@ st.markdown("<h5 style='text-align: justify; color: black;'>Esse projeto resulto
 st.markdown("-------------------")
 
 
-import pandas as pd
-import matplotlib.pyplot as plt
-import plotly.express as px
+
 
 # arquivo = './Bootcamp Enap/projeto-smp/df_tec_geracao.csv'
 

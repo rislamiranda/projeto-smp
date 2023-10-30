@@ -5,7 +5,7 @@
 import streamlit as st
 import pandas as pd
 #import seaborn as sns
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 #import numpy as np
 import os
 import webbrowser
@@ -37,7 +37,7 @@ st.set_page_config(
 ### ************************************************************************************###
  
 # Criando o MENU PRINCIPAL - BARRA
-selected = option_menu(None, ["Órgãos do Governo",  "Acesso a Informação", "Legislação", 'Acessibilidade'], 
+selected = option_menu(None, ["Projeto",  "Acesso a Informação", "Legislação", 'Acessibilidade'], 
         #icons=['house', "map", "bar-chart", 'book'], 
         icons=['house', "map", "bar-chart", 'book'], 
         menu_icon="cast", default_index=0, orientation="horizontal",
@@ -54,7 +54,7 @@ selected = option_menu(None, ["Órgãos do Governo",  "Acesso a Informação", "
 #my_file.meu_codigo()
 
 # O que acontece se clicarmos nos botões laterais
-if selected == "Órgãos do Governo":
+if selected == "Projeto":
         #webbrowser.open("https://www.gov.br/pt-br/orgaos-do-governo") 
         st.write(' ')
 elif selected == "Acesso a Informação":
