@@ -197,6 +197,17 @@ st.plotly_chart(fig)
 #
 #tec_2023_5g_por_estado.rename(columns=str.lower, inplace=True) #renomear as colunas para minúsculas
 
+#import streamlit as st
+from streamlit.components.v1 import html
+
+# Carregue o arquivo HTML do mapa
+with open('./mapas/mapa_estados_5g_com_tooltip.html', 'r') as f:
+    mapa_html = f.read()
+
+# Insira o mapa HTML em seu aplicativo Streamlit
+st.markdown('*Mapa 5G com Tooltip*')
+html(mapa_html, height=600)
+
 
 ### ************************************************************************************###
 ### Inicio do Código da FERNANDA para criar o GRAFICO DINÂMICO
