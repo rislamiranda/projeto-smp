@@ -9,9 +9,15 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 #import plotly.io as pio
 
+import numpy as np
+
 import os
 from geojson_rewind import rewind
 import requests
+
+#A biblioteca pickle é uma biblioteca Python padrão que permite serializar e desserializar objetos Python. Serializar um objeto significa converter o objeto em uma representação binária que pode ser armazenada em um arquivo ou transmitida por uma rede. Desserializar um objeto significa converter a representação binária de volta para o objeto Python.
+#Faz com que a exibição dos gráficos fique mais rapida
+import pickle 
 
 ### ************************************************************************************###
 ### Adicionando o título da página ###
@@ -32,7 +38,7 @@ st.markdown("-------------------")
 ### ************************************************************************************###
 ### Orientação do Bruno para melhorar a performance da exibição dos dados ###
 ### ************************************************************************************###
-#@st.cache_data
+#Adicionar o comando @st.cache_data antes de cada função
 
 
 ### ************************************************************************************###
@@ -58,12 +64,12 @@ def abre_url():
 ### ************************************************************************************###
 
 # Chame a função de carga dos dados
-arquivo = '../data/df_tec_geracao.csv'
+arquivo = './dadospublicos/df_tec_geracao.csv'
 df = load_data(arquivo)
 
 
-print(len(df))
-print(df.shape)
+#print(len(df))
+#print(df.shape)
 
 df.head()
 
@@ -110,7 +116,7 @@ tec_3g = df.query('`Tecnologia Geração` == "3G"')
 tec_4g = df.query('`Tecnologia Geração` == "4G"')
 tec_m2m = df.query('`Tecnologia Geração` == "M2M"')
 tec_5g = df.query('`Tecnologia Geração` == "5G"')
-tec_5g_nsa = df.query('`Tecnologia Geração` == "5G Non Stand Alone"')
+#tec_5g_nsa = df.query('`Tecnologia Geração` == "5G Non Stand Alone"')
 
 # ChatCPT me ajudando na sintaxe:
 # O erro no código que você forneceu está relacionado à forma como o nome da coluna 'Tecnologia Geração' é 
@@ -126,7 +132,7 @@ df['Tecnologia Geração'].unique()
 
 ## comandos para plotar um gráfico do pyplot do matplotlib
 
-grafico_1 = plt.figure(figsize=(8,5))
+grafico_1 = plt.figure(figsize=(6,5))
 plt.plot(tec_1g["ano"], tec_1g["percentual"], label = "1G", linewidth = 2.5, color = "cyan") #argumentos são eixo x e eixo y
 plt.plot(tec_2g["ano"], tec_2g["percentual"], label = "2G", linewidth = 2.5, color = "green")
 plt.plot(tec_3g["ano"], tec_3g["percentual"], label = "3G", linewidth = 2.5, color = "purple")
@@ -149,81 +155,78 @@ st.pyplot(grafico_1)
 
 #plt.savefig('grafico_tecnologia_estatico.png')
 
+### ************************************************************************************###
+### Inicio do Código da Bia para criar o 2o MAPA
+### ************************************************************************************###
+
+st.markdown("-------------------")
+st.markdown("<h5 style='text-align: justify; color: black;'> O Gráfico abaixo exibe a tecnologia de geração dos telefones móveis usados pelos brasileiros</h5>", unsafe_allow_html=True)
+st.markdown("-------------------")
+
+# Chame a função de carga dos dados
+arquivo = './dadospublicos/tec_2023_modalidade.csv'
+modalidade = load_data(arquivo)
+
+#modalidade = pd.read_csv('./dadospublicos/tec_2023_modalidade.csv', sep = ';')
+
+modalidade['percentual'] = modalidade['percentual'].str.replace(',', '.', regex=True).astype(float)
+modalidade['media_ano'] = modalidade['media_ano'].str.replace(',', '.', regex=True).astype(float)
+
+
+# import plotly.express as px
+
+fig = px.treemap(modalidade, path=[px.Constant("Tecnologia de Geração de Telefonia Móvel - Ano 2023"), 'Tecnologia Geração', 'Modalidade de Cobrança', 'percentual'], values='media_ano',           color='percentual', hover_data=['media_ano'], color_continuous_scale='YlGnBu')
+fig.update_traces(root_color="lightgrey")
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
+#fig.show()
+#st.pyplot(fig)
+st.plotly_chart(fig)
 
 
 ### ************************************************************************************###
 ### Inicio do Código da FERNANDA para criar o GRAFICO DINÂMICO
 ### ************************************************************************************###
 
-os.getcwd()
-arquivo = '../data/df_cm_ddd.csv'
-resultados = load_data(arquivo)
+st.markdown("-------------------")
+st.markdown("<h5 style='text-align: justify; color: black;'> O Gráfico abaixo permite ao usuário interagir selecionando a Operadora e visualizando a concentração de telefones móveis por municípios brasileiros</h5>", unsafe_allow_html=True)
+st.markdown("-------------------")
 
-resultados.info()
+import time
 
-#Modificações Hélio
-resultados['media_ano'] = resultados['media_ano'].map(lambda x: float(x.replace(',', '.')))
+resultados = st.selectbox('Qual a operadora gostaria de ver a concentração de dados por Municípios?', ('TELECOM AMERICAS','TELEFONICA', 'TELECOM ITALIA', 'OI','OUTROS'))
 
-resultados = resultados[resultados['Grupo Econômico'] == 'TELECOM AMERICAS']
+@st.cache_data
+def carrega_mapa():
+    start_time = time.time()
+    #file_names =['mapa_oi.pkl']
+    file_names=['mapa_oi.pkl','mapa_TelecomAmericas_Claro.pkl','mapa_TelecomItalia_Tim.pkl','mapa_Telefonica_Vivo.pkl','mapa_Outros.pkl']
+    mapas = {}
+    url = 'https://raw.githubusercontent.com/rislamiranda/projeto-smp/main/mapas/'
+    for mapa in file_names:
+        mapas[mapa] = pickle.load(requests.get(url+mapa, stream='True').raw)
+        print("--- %s seconds ---" % (time.time() - start_time))
+    return mapas 
 
-#criando dataframe com informações de georreferenciamento de municípios
-georreferenciamento_df = pd.read_csv('https://raw.githubusercontent.com/kelvins/Municipios-Brasileiros/main/csv/municipios.csv')
+mapas = carrega_mapa()
+print("--- carrega mapa %s seconds ---" % (time.time() - start_time))
 
-#os dados de georreferenciamento tem 7 dígitos (vamos remover o dígito verificador e atualizar o dataframe)
-georreferenciamento_df['codigo_ibge'] = georreferenciamento_df['codigo_ibge']//10
+def cor_grupos(escolha_grupo):
+    if escolha_grupo == 'TELECOM AMERICAS':
+        result = 'mapa_TelecomAmericas_Claro.pkl'
+    elif escolha_grupo == 'TELECOM ITALIA':
+        result = 'mapa_TelecomItalia_Tim.pkl'
+    elif escolha_grupo == 'TELEFONICA':
+        result = 'mapa_Telefonica_Vivo.pkl'
+    elif escolha_grupo == 'OI':
+        result = 'mapa_oi.pkl'
+    else:
+        result = 'mapa_Outros.pkl'      # gray_r para fazer a escala de cinzas invertido
+    return result
 
-georreferenciamento_df.head()
-
-#cruzamento do dataframe resultados com as informações de georreferenciamento
-resultados_df = pd.merge(resultados[['Código Nacional', 'ano', 'media_ano']],
-                         georreferenciamento_df[['ddd', 'nome', 'codigo_ibge', 'codigo_uf', 'latitude', 'longitude']],
-                         left_on='Código Nacional',
-                         right_on='ddd',
-                         how='inner')
-
-
-
-#resultados_df.head()
-
-#puxar a malha geográfica do brasil a nível de município
-
-#geojson = requests.get(f'http://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?formato=application/vnd.geo+json&qualidade=minima&intrarregiao=municipio').json()
-geojson = abre_url()
-
-#a malha geográfica do ibge tem 7 dígitos (vamos remover o dígito verificador e atualizar a malha)
-
-for feature in geojson['features']:
-    feature['properties']['codarea'] = feature['properties']['codarea'][:-1]
-geojson = rewind(geojson, rfc7946=False)
-
-
-max_min = resultados_df.groupby('ano').agg({'media_ano':'max'}).min().values[0]
-#max_min
-
-resultados_df['media_ano'] = resultados_df['media_ano'].map(lambda x:max_min if x > max_min else x)
-
-#construir o mapa choroplético com timeline no campo de ano
-#import plotly.express as px
-#import plotly.io as pio
-#pio.renderers.default = 'iframe'
-
-fig = px.choropleth(resultados_df,
-                    geojson=geojson,
-                    # scope='south america',
-                    color='media_ano',
-                    color_continuous_scale="Reds",
-                    locations='codigo_ibge',
-                    featureidkey='properties.codarea',
-                    hover_name='nome',
-                    animation_frame='ano')
-
-fig.update_layout(height=800, width=1000, autosize=False)
-fig.update_geos(fitbounds = "locations", visible = False)
-fig.update_traces(marker_line_width=0)  ## alteração do Helio
-
-st.plotly_chart(fig)
-
-
+#st.write(cor_grupos(resultados))
+print("--- Iniciando o plotly %s seconds ---" % (time.time() - start_time))
+st.plotly_chart(mapas[cor_grupos(resultados)])  
+print("--- finalizando o plotly %s seconds ---" % (time.time() - start_time))
 
 
 ### ************************************************************************************###
