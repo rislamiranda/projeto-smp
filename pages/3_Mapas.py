@@ -35,6 +35,9 @@ st.markdown("-------------------")
 st.markdown("<h5 style='text-align: justify; color: black;'>Esse projeto resultou em um conjunto de mapas/gráficos visando facilitar as análises e entendimento dos resultados pelos interessados: </h5>", unsafe_allow_html=True)
 st.markdown("-------------------")
 
+st.markdown("<h5 style='text-align: justify; color: blue;'>Evolução das Tecnologias de Geração </h5>", unsafe_allow_html=True)
+st.markdown("<h6 style='text-align: justify; color: black;'>Atualmente, a tecnologia mais utilizada no Brasil é a 4G, que representa aproximadamente 78% do total de acessos nacionalmente. A tecnologia 3G teve seu ápice em 2015 e, desde então, vem paulatinamente sendo substituída pela 4G.  Já a tecnologia 5G iniciou sua fase de testes em 2021 e sua operação comercial em 2022, mas, até o momento, representa pouco menos de 4% do número total de acessos. O gráfico abaixo traz a evolução das tecnologias de geração no Brasil desde 2009 até 2023 (dados consolidados até setembro). </h6>", unsafe_allow_html=True)
+
 
 # arquivo = './Bootcamp Enap/projeto-smp/df_tec_geracao.csv'
 
@@ -162,9 +165,11 @@ st.pyplot(grafico_1)
 ### Inicio do Código da Bia para criar o 2o MAPA
 ### ************************************************************************************###
 
-st.markdown("-------------------")
-st.markdown("<h5 style='text-align: justify; color: black;'> O Gráfico abaixo exibe a tecnologia de geração dos telefones móveis usados pelos brasileiros</h5>", unsafe_allow_html=True)
-st.markdown("-------------------")
+
+st.markdown("<h5 style='text-align: justify; color: blue;'>Acesso aos dados móveis por tecnologia de geração </h5>", unsafe_allow_html=True)
+st.markdown("<h6 style='text-align: justify; color: black;'>A apresentação gráfica abaixo retrata a modalidade de cobrança de acesso aos dados móveis por tecnologia de geração. Em 2023, cerca de 78% dos acessos são via tecnologia 4G, e metade dos usuários utilizam a modalidade pós-paga (50,8%), e a outra metade, a pré-paga (49,2%). As demais tecnologias (5G, 3G e 2G) representam, individualmente, menos de 10% dos acessos, e a modalidade de cobrança predominante em cada uma delas é a pós-paga (mais de 70%): </h6>", unsafe_allow_html=True)
+
+
 
 # Chame a função de carga dos dados
 arquivo = './dadospublicos/tec_2023_modalidade.csv'
