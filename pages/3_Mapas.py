@@ -132,7 +132,7 @@ df['Tecnologia Geração'].unique()
 
 ## comandos para plotar um gráfico do pyplot do matplotlib
 
-grafico_1 = plt.figure(figsize=(8,5))
+grafico_1 = plt.figure(figsize=(6,5))
 plt.plot(tec_1g["ano"], tec_1g["percentual"], label = "1G", linewidth = 2.5, color = "cyan") #argumentos são eixo x e eixo y
 plt.plot(tec_2g["ano"], tec_2g["percentual"], label = "2G", linewidth = 2.5, color = "green")
 plt.plot(tec_3g["ano"], tec_3g["percentual"], label = "3G", linewidth = 2.5, color = "purple")
@@ -191,19 +191,24 @@ st.markdown("-------------------")
 st.markdown("<h5 style='text-align: justify; color: black;'> O Gráfico abaixo permite ao usuário interagir selecionando a Operadora e visualizando a concentração de telefones móveis por municípios brasileiros</h5>", unsafe_allow_html=True)
 st.markdown("-------------------")
 
+import time
+
+resultados = st.selectbox('Qual a operadora gostaria de ver a concentração de dados por Municípios?', ('TELECOM AMERICAS','TELEFONICA', 'TELECOM ITALIA', 'OI','OUTROS'))
+
 @st.cache_data
 def carrega_mapa():
-    file_names =['mapa_oi.pkl']
-    #file_names=['mapa_oi.pkl','mapa_TelecomAmericas_Claro.pkl','mapa_TelecomItalia_Tim.pkl','mapa_Telefonica_Vivo.pkl','mapa_Outros.pkl']
+    start_time = time.time()
+    #file_names =['mapa_oi.pkl']
+    file_names=['mapa_oi.pkl','mapa_TelecomAmericas_Claro.pkl','mapa_TelecomItalia_Tim.pkl','mapa_Telefonica_Vivo.pkl','mapa_Outros.pkl']
     mapas = {}
     url = 'https://raw.githubusercontent.com/rislamiranda/projeto-smp/main/mapas/'
     for mapa in file_names:
         mapas[mapa] = pickle.load(requests.get(url+mapa, stream='True').raw)
+        print("--- %s seconds ---" % (time.time() - start_time))
     return mapas 
 
 mapas = carrega_mapa()
-
-resultados = st.selectbox('Qual a operadora gostaria de ver a concentração de dados por Municípios?', ('TELECOM AMERICAS','TELEFONICA', 'TELECOM ITALIA', 'OI','OUTROS'))
+print("--- carrega mapa %s seconds ---" % (time.time() - start_time))
 
 def cor_grupos(escolha_grupo):
     if escolha_grupo == 'TELECOM AMERICAS':
@@ -219,7 +224,9 @@ def cor_grupos(escolha_grupo):
     return result
 
 #st.write(cor_grupos(resultados))
+print("--- Iniciando o plotly %s seconds ---" % (time.time() - start_time))
 st.plotly_chart(mapas[cor_grupos(resultados)])  
+print("--- finalizando o plotly %s seconds ---" % (time.time() - start_time))
 
 
 ### ************************************************************************************###
