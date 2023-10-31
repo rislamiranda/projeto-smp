@@ -195,15 +195,8 @@ st.plotly_chart(fig)
 ### Inicio do Código da Graciele para criar o MAPA
 ### ************************************************************************************###
 
-# Chame a função de carga dos dados
-#arquivo = './dadospublicos/uf_5g.csv'
-#df = load_data(arquivo)
-#
-###**Ler o df de dados de 5g por UF**
-#tec_2023_5g_por_estado = pd.read_csv('./tec_2023_5g_por_estado.csv',sep =';')
-#tec_2023_5g_por_estado.head()
-#
-#tec_2023_5g_por_estado.rename(columns=str.lower, inplace=True) #renomear as colunas para minúsculas
+st.markdown("<h5 style='text-align: justify; color: blue;'>Tecnologia de geração 5G </h5>", unsafe_allow_html=True)
+st.markdown("<h6 style='text-align: justify; color: black;'>A tecnologia de geração 5G é o mais recente padrão tecnológico para serviços móveis: sua operação comercial iniciou em 2022 e está em expansão pelo País. Em 2023, representa pouco menos de 4% do total de acessos a dados móveis. A figura abaixo é um mapa dinâmico do Brasil que traz a penetração da tecnologia 5G por estado (em termos de percentual do total de acessos nesta modalidade), bastando passar o mouse sobre o estado para visualizar os dados. Os estados de SP, RJ, MG, PR e DF concentram o maior percentual de acessos 5G no País: </h6>", unsafe_allow_html=True)
 
 #import streamlit as st
 from streamlit.components.v1 import html
