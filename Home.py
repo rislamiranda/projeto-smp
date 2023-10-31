@@ -36,7 +36,7 @@ st.set_page_config(
 ### ************************************************************************************###
  
 # Criando o MENU PRINCIPAL - BARRA
-selected = option_menu(None, ["Projeto",  "Acesso a Informação", "Legislação", 'Acessibilidade'], 
+selected = option_menu(None, ["Projeto",  "Acesso à Informação", "Legislação", 'Acessibilidade'], 
         #icons=['house', "map", "bar-chart", 'book'], 
         icons=['house', "map", "bar-chart", 'book'], 
         menu_icon="cast", default_index=0, orientation="horizontal",
