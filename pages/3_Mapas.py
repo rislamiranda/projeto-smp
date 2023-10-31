@@ -184,6 +184,21 @@ st.plotly_chart(fig)
 
 
 ### ************************************************************************************###
+### Inicio do Código da Graciele para criar o MAPA
+### ************************************************************************************###
+
+# Chame a função de carga dos dados
+#arquivo = './dadospublicos/uf_5g.csv'
+#df = load_data(arquivo)
+#
+###**Ler o df de dados de 5g por UF**
+#tec_2023_5g_por_estado = pd.read_csv('./tec_2023_5g_por_estado.csv',sep =';')
+#tec_2023_5g_por_estado.head()
+#
+#tec_2023_5g_por_estado.rename(columns=str.lower, inplace=True) #renomear as colunas para minúsculas
+
+
+### ************************************************************************************###
 ### Inicio do Código da FERNANDA para criar o GRAFICO DINÂMICO
 ### ************************************************************************************###
 
@@ -195,17 +210,52 @@ import time
 
 resultados = st.selectbox('Qual a operadora gostaria de ver a concentração de dados por Municípios?', ('TELECOM AMERICAS','TELEFONICA', 'TELECOM ITALIA', 'OI','OUTROS'))
 
+import gzip
+
+# Nome do arquivo Pickle compactado
+#pickle_file = './mapas/mapa_Telefonica_Vivo.pkl.gz'
+
+# Use gzip para abrir o arquivo compactado em modo leitura binária ('rb')
+#with gzip.open(pickle_file, 'rb') as f:
+ #   loaded_data = pickle.load(f)
+
+#print('Dados descompactados:')
+#print(loaded_data)
+
+# Open the zip file
+
 @st.cache_data
 def carrega_mapa():
     start_time = time.time()
-    #file_names =['mapa_oi.pkl']
-    file_names=['mapa_oi.pkl','mapa_TelecomAmericas_Claro.pkl','mapa_TelecomItalia_Tim.pkl','mapa_Telefonica_Vivo.pkl','mapa_Outros.pkl']
+    file_names =['.\mapas\mapa_Telefonica_Vivo.pkl.gz']
+    #file_names=['mapa_oi.pkl','mapa_TelecomAmericas_Claro.pkl','mapa_TelecomItalia_Tim.pkl','mapa_Telefonica_Vivo.pkl','mapa_Outros.pkl']
     mapas = {}
-    url = 'https://raw.githubusercontent.com/rislamiranda/projeto-smp/main/mapas/'
-    for mapa in file_names:
-        mapas[mapa] = pickle.load(requests.get(url+mapa, stream='True').raw)
-        print("--- %s seconds ---" % (time.time() - start_time))
+    #url = 'https://raw.githubusercontent.com/rislamiranda/projeto-smp/main/mapas/'
+
+    with gzip.GzipFile(file_names[0], 'r') as archive:
+    # Open the pickle file inside the zip file
+        with archive.open(file_names[0][:-3]) as file:
+        # Load the data from the pickle file
+            mapa[file_names[0]] = pickle.load(file)
+        
+   # for mapa in file_names:
+    #    mapas[mapa] = pickle.load(requests.get(url+gzip.open(mapa, 'rb'), stream='True').raw)
+     #   print("--- %s seconds ---" % (time.time() - start_time))
     return mapas 
+
+
+
+#@st.cache_data
+#ef carrega_mapa():
+#   start_time = time.time()
+#   #file_names =['mapa_oi.pkl']
+#   file_names=['mapa_oi.pkl','mapa_TelecomAmericas_Claro.pkl','mapa_TelecomItalia_Tim.pkl','mapa_Telefonica_Vivo.pkl','mapa_Outros.pkl']
+#   mapas = {}
+#   url = 'https://raw.githubusercontent.com/rislamiranda/projeto-smp/main/mapas/'
+#   for mapa in file_names:
+#       mapas[mapa] = pickle.load(requests.get(url+mapa, stream='True').raw)
+#       print("--- %s seconds ---" % (time.time() - start_time))
+#   return mapas 
 
 mapas = carrega_mapa()
 print("--- carrega mapa %s seconds ---" % (time.time() - start_time))
