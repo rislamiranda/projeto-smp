@@ -164,7 +164,7 @@ st.markdown("<h5 style='text-align: left; color: black;'>- Plotly </h5>", unsafe
 st.markdown("<h5 style='text-align: left; color: black;'>- Seaborn </h5>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: left; color: black;'>- StreamLit </h5>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: left; color: black;'>- Power BI </h5>", unsafe_allow_html=True)
-
+st.markdown("<h5 style='text-align: left; color: black;'>- Folium </h5>", unsafe_allow_html=True)
 
 ### ************************************************************************************###
 ### Código EXTRA ###
