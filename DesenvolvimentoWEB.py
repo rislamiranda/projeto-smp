@@ -129,10 +129,10 @@ st.markdown("<h5 style='text-align: left; color: black;'> - 2009 a 2023 </h5>", 
 
 # Crie um ícone
 st.markdown("<h4 style='text-align: left; color: blue;'>Indicadores: </h4>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: left; color: black;'>- Market Share </h5>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: left; color: black;'>- HHI </h5>", unsafe_allow_html=True)
-st.markdown("<h5 style='text-align: left; color: black;'>- CR4 </h5>", unsafe_allow_html=True)
-st.markdown("<h5 style='text-align: left; color: black;'>- CR3 </h5>", unsafe_allow_html=True)
-
+st.markdown("<h5 style='text-align: left; color: black;'>- Tecnologia de Geração </h5>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: left; color: black;'>- Tecnologia 5G </h5>", unsafe_allow_html=True)
 
 st.markdown("-------------------")
 st.markdown("<h4 style='text-align: left; color: black;'>Fonte de Dados </h4>", unsafe_allow_html=True)
@@ -154,9 +154,13 @@ st.markdown(f"[Link para a EBC]({link3})")
 
 
 st.markdown("-------------------")
-st.markdown("<h4 style='text-align: justify; color: black;'>Ferramentas de TI utilizadas</h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: justify; color: black;'>Ferramentas de TI e Biblicotecas</h4>", unsafe_allow_html=True)
 st.markdown("As ferramentas de tecnologia utilizadas no projeto são:")
 st.markdown("<h5 style='text-align: left; color: black;'>-  Python </h5>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: left; color: black;'>- Numpy </h5>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: left; color: black;'>- Pandas </h5>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: left; color: black;'>- MatPlotLib </h5>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: left; color: black;'>- Plotly </h5>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: left; color: black;'>- Seaborn </h5>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: left; color: black;'>- StreamLit </h5>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: left; color: black;'>- Power BI </h5>", unsafe_allow_html=True)
