@@ -15,6 +15,9 @@ import os
 from geojson_rewind import rewind
 import requests
 
+import time
+import gzip
+
 #A biblioteca pickle é uma biblioteca Python padrão que permite serializar e desserializar objetos Python. Serializar um objeto significa converter o objeto em uma representação binária que pode ser armazenada em um arquivo ou transmitida por uma rede. Desserializar um objeto significa converter a representação binária de volta para o objeto Python.
 #Faz com que a exibição dos gráficos fique mais rapida
 import pickle 
@@ -217,11 +220,41 @@ st.markdown("-------------------")
 st.markdown("<h5 style='text-align: justify; color: black;'> O Gráfico abaixo permite ao usuário interagir selecionando a Operadora e visualizando a concentração de telefones móveis por municípios brasileiros</h5>", unsafe_allow_html=True)
 st.markdown("-------------------")
 
-import time
+
 
 resultados = st.selectbox('Qual a operadora gostaria de ver a concentração de dados por Municípios?', ('TELECOM AMERICAS','TELEFONICA', 'TELECOM ITALIA', 'OI','OUTROS'))
 
-import gzip
+@st.cache_resource
+def carrega_mapa(file_name):
+    with gzip.GzipFile('./mapas/' + file_name+'.gz', 'r') as archive:
+           mapa= pickle.load(archive)
+    return mapa
+
+def cor_grupos(escolha_grupo):
+   if escolha_grupo == 'TELECOM AMERICAS':
+       result = 'mapa_TelecomAmericas_Claro.pkl'
+   elif escolha_grupo == 'TELECOM ITALIA':
+       result = 'mapa_TelecomItalia_Tim.pkl'
+   elif escolha_grupo == 'TELEFONICA':
+       result = 'mapa_Telefonica_Vivo.pkl'
+   elif escolha_grupo == 'OI':
+       result = 'mapa_oi.pkl'
+   else:
+       result = 'mapa_Outros.pkl'     
+   return result
+
+st.plotly_chart(carrega_mapa(cor_grupos(resultados)))
+
+
+# @st.cache_data
+# def carrega_mapa(file_name):
+#     start_time = time.time()
+#     with open('./mapas/'+file_name,'rb') as file:
+#         mapa= pickle.load(file)
+#     print("--- carga mapa %s seconds ---" % (time.time() - start_time))
+#     return mapa
+
+#import gzip
 
 # Nome do arquivo Pickle compactado
 #pickle_file = './mapas/mapa_Telefonica_Vivo.pkl.gz'
