@@ -215,9 +215,8 @@ html(mapa_html, height=600)
 ### ************************************************************************************###
 
 st.markdown("-------------------")
-st.markdown("<h5 style='text-align: justify; color: black;'> O Gráfico abaixo permite ao usuário interagir selecionando a Operadora e visualizando a concentração de telefones móveis por municípios brasileiros</h5>", unsafe_allow_html=True)
-st.markdown("-------------------")
-
+st.markdown("<h5 style='text-align: justify; color: blue;'>Concentração de acessos por operadora, por região </h5>", unsafe_allow_html=True)
+st.markdown("<h6 style='text-align: justify; color: black;'>Abaixo temos um mapa dinâmico que permite ao usuário escolher e ver, por operadora, as regiões, por código DDD, de concentração de mercado da operadora selecionada: quanto mais escura, na escala de cores, estiver determinada região, maior a concentração da operadora selecionada (em número de acessos). Basta selecionar na caixa de diálogo abaixo a operadora de sua preferência: </h6>", unsafe_allow_html=True)
 
 
 resultados = st.selectbox('Qual a operadora gostaria de ver a concentração de dados por Municípios?', ('TELECOM AMERICAS','TELEFONICA', 'TELECOM ITALIA', 'OI','OUTROS'))
@@ -242,6 +241,7 @@ def cor_grupos(escolha_grupo):
    return result
 
 st.plotly_chart(carrega_mapa(cor_grupos(resultados)))
+
 
 
 # @st.cache_data
