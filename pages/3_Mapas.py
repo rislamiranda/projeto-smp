@@ -235,60 +235,45 @@ import gzip
 
 # Open the zip file
 
-@st.cache_data
-def carrega_mapa():
-    start_time = time.time()
-    file_names =['.\mapas\mapa_Telefonica_Vivo.pkl.gz']
-    #file_names=['mapa_oi.pkl','mapa_TelecomAmericas_Claro.pkl','mapa_TelecomItalia_Tim.pkl','mapa_Telefonica_Vivo.pkl','mapa_Outros.pkl']
-    mapas = {}
-    #url = 'https://raw.githubusercontent.com/rislamiranda/projeto-smp/main/mapas/'
-
-    with gzip.GzipFile(file_names[0], 'r') as archive:
-    # Open the pickle file inside the zip file
-        with archive.open(file_names[0][:-3]) as file:
-        # Load the data from the pickle file
-            mapa[file_names[0]] = pickle.load(file)
-        
-   # for mapa in file_names:
-    #    mapas[mapa] = pickle.load(requests.get(url+gzip.open(mapa, 'rb'), stream='True').raw)
-     #   print("--- %s seconds ---" % (time.time() - start_time))
-    return mapas 
-
-
+###INICIA AQUI
 
 #@st.cache_data
-#ef carrega_mapa():
-#   start_time = time.time()
-#   #file_names =['mapa_oi.pkl']
-#   file_names=['mapa_oi.pkl','mapa_TelecomAmericas_Claro.pkl','mapa_TelecomItalia_Tim.pkl','mapa_Telefonica_Vivo.pkl','mapa_Outros.pkl']
-#   mapas = {}
-#   url = 'https://raw.githubusercontent.com/rislamiranda/projeto-smp/main/mapas/'
-#   for mapa in file_names:
-#       mapas[mapa] = pickle.load(requests.get(url+mapa, stream='True').raw)
-#       print("--- %s seconds ---" % (time.time() - start_time))
-#   return mapas 
+#def carrega_mapa():
+#    start_time = time.time()
+#    file_names =['mapa_Telefonica_Vivo.pkl.gz']
+#    #file_names=['mapa_oi.pkl','mapa_TelecomAmericas_Claro.pkl','mapa_TelecomItalia_Tim.pkl','mapa_Telefonica_Vivo.pkl','mapa_Outros.pkl']
+#    mapas = {}
+#    #url = 'https://raw.githubusercontent.com/rislamiranda/projeto-smp/main/mapas/'
+#
+#    for arquivo_mapa in file_names:
+#        with gzip.GzipFile('./mapas/' + arquivo_mapa, 'r') as archive:
+#            mapas[arquivo_mapa[:-3]] = pickle.load(archive)
+#            print("--- %s seconds ---" % (time.time() - start_time))
+#    return mapas
+#    
+#start_time = time.time()
+#mapas = carrega_mapa()
+#print("--- carrega mapa %s seconds ---" % (time.time() - start_time))
+#
+#def cor_grupos(escolha_grupo):
+#    if escolha_grupo == 'TELECOM AMERICAS':
+#        result = 'mapa_TelecomAmericas_Claro.pkl'
+#    elif escolha_grupo == 'TELECOM ITALIA':
+#        result = 'mapa_TelecomItalia_Tim.pkl'
+#    elif escolha_grupo == 'TELEFONICA':
+#        result = 'mapa_Telefonica_Vivo.pkl'
+#    elif escolha_grupo == 'OI':
+#        result = 'mapa_oi.pkl'
+#    else:
+#        result = 'mapa_Outros.pkl'     
+#    return result
+#
+##st.write(cor_grupos(resultados))
+#print("--- Iniciando o plotly %s seconds ---" % (time.time() - start_time))
+#st.plotly_chart(mapas[cor_grupos(resultados)])  
+#print("--- finalizando o plotly %s seconds ---" % (time.time() - start_time))
 
-mapas = carrega_mapa()
-print("--- carrega mapa %s seconds ---" % (time.time() - start_time))
-
-def cor_grupos(escolha_grupo):
-    if escolha_grupo == 'TELECOM AMERICAS':
-        result = 'mapa_TelecomAmericas_Claro.pkl'
-    elif escolha_grupo == 'TELECOM ITALIA':
-        result = 'mapa_TelecomItalia_Tim.pkl'
-    elif escolha_grupo == 'TELEFONICA':
-        result = 'mapa_Telefonica_Vivo.pkl'
-    elif escolha_grupo == 'OI':
-        result = 'mapa_oi.pkl'
-    else:
-        result = 'mapa_Outros.pkl'      # gray_r para fazer a escala de cinzas invertido
-    return result
-
-#st.write(cor_grupos(resultados))
-print("--- Iniciando o plotly %s seconds ---" % (time.time() - start_time))
-st.plotly_chart(mapas[cor_grupos(resultados)])  
-print("--- finalizando o plotly %s seconds ---" % (time.time() - start_time))
-
+###FINALIZA AQUI
 
 ### ************************************************************************************###
 ### Código EXTRA ###
