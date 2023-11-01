@@ -25,7 +25,9 @@ st.markdown("<h6 style='text-align: justify; color: black;'>Ao analisarem dados,
 # Link para o PBI
 #src="https://app.powerbi.com/view?r=eyJrIjoiMGU2Njc3NWQtZDkzNC00YWZhLWFmYmMtNDcyOTlmN2RlNjZlIiwidCI6IjlkYmE0ODBjLTRmYTctNDJmNC1iYmEzLTBmYjEzNzVmYmU1ZiJ9" 
 
-src="https://app.powerbi.com/view?r=eyJrIjoiMzUwY2MxMTctMWZiMy00ZDc2LThlNDktZWEyYjJjOGMxYzljIiwidCI6IjlkYmE0ODBjLTRmYTctNDJmNC1iYmEzLTBmYjEzNzVmYmU1ZiJ9"
+#src="https://app.powerbi.com/view?r=eyJrIjoiMzUwY2MxMTctMWZiMy00ZDc2LThlNDktZWEyYjJjOGMxYzljIiwidCI6IjlkYmE0ODBjLTRmYTctNDJmNC1iYmEzLTBmYjEzNzVmYmU1ZiJ9"
+
+src="https://app.powerbi.com/view?r=eyJrIjoiMGU2Njc3NWQtZDkzNC00YWZhLWFmYmMtNDcyOTlmN2RlNjZlIiwidCI6IjlkYmE0ODBjLTRmYTctNDJmNC1iYmEzLTBmYjEzNzVmYmU1ZiJ9"
 
 # Exiba o link de página
 st.markdown(f"[Link para o Painel Mercado Regulado de Telefonia Móvel ]({src})")
