@@ -27,7 +27,7 @@ st.markdown("<h5 style='text-align: justify; color: black;'>A documentação com
 st.markdown("-------------------")
 
 # Localize o arquivo .pdf
-arquivo_pdf = "./documentacao/monitoramentoFrequenciaEvasaoPresenca.pdf"
+arquivo_pdf = "./documentacao/RELATÓRIOFINALPROJETOSMP.pdf"
 
 
 # Instruções para o usuário
@@ -36,7 +36,7 @@ st.write("Clique no botão abaixo para fazer o download do relatório do projeto
 with open(arquivo_pdf, "rb") as pdf_file:
     PDFbyte = pdf_file.read()
 
-st.download_button(label="Relatório do Projeto",
+st.download_button(label="Relatório do Projeto ",
                     data=PDFbyte,
                     file_name="RelatorioProjeto.pdf",
                     mime='application/octet-stream')
